@@ -14,6 +14,7 @@ for subj_i = 1:length(DAT_5freq),
 end
 
 allITIs = cell2matNaN(ITIs, 2, 'noCell');
+allITIsTraining = allITIs(400:end, :);
 
 myFigure([600, 300])
 subplot(1, 2, 1); hold on;
@@ -27,13 +28,13 @@ title('ITIs over course of expt')
 legend(h, 'Mean across subjects')
 
 subplot(1, 2, 2); hold on;
-histogram(allITIs(:), 'facecolor', 'w')
+histogram(allITIsTraining(:), 'facecolor', 'w')
 xlim([0, 12])
-plot(nanmean(allITIs(:)) * ones(1, 2), get(gca, 'ylim'), ...
+plot(nanmean(allITIsTraining(:)) * ones(1, 2), get(gca, 'ylim'), ...
     'k', 'linewidth', 3)
-textinsert(0.4, 0.5, sprintf('Mean ITI = %.2f sec', nanmean(allITIs(:))))
-textinsert(0.4, 0.45, sprintf('Stdv ITI = %.2f sec', nanstd(allITIs(:))))
+textinsert(0.4, 0.5, sprintf('Mean ITI = %.2f sec', nanmean(allITIsTraining(:))))
+textinsert(0.4, 0.45, sprintf('Stdv ITI = %.2f sec', nanstd(allITIsTraining(:))))
 xlabel('ITI (sec)')
 ylabel('# Trials')
-title('All ITIs aggregated')
+title('All ITIs (during training) aggregated')
 myprintfig('Figures/IntertrialIntvs')
